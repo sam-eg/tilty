@@ -7,11 +7,12 @@ public class SpawnScript : MonoBehaviour
 
     public GameObject fallBallPrefab;
     public int fallBallCount;
+    private GameController gameController;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class SpawnScript : MonoBehaviour
     {
         fallBallCount = FindObjectsOfType<FallBall>().Length;
 
-        if (fallBallCount == 0)
+        if (fallBallCount == 0 && gameController.gameRunning)
         {
             Instantiate(fallBallPrefab, GenerateSpawnPosition(), fallBallPrefab.transform.rotation);
         }

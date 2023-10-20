@@ -5,13 +5,12 @@ using UnityEngine;
 public class Floor : MonoBehaviour
 {
 
-    public int score = 0;
-    public bool gameRunning = true;
+    private GameController gameController;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
@@ -25,12 +24,15 @@ public class Floor : MonoBehaviour
         if (collision.gameObject.CompareTag("FallBall"))
         {
             Destroy(collision.gameObject);
-            score++;
+            if (gameController.gameRunning)
+            {
+                gameController.score++;
+            }
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
-            gameRunning = false;
+            gameController.gameRunning = false;
         }
     }
 }
