@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody playerRigidBody;
     private GameObject focalPoint;
+    private GameController gameController;
 
     public float speed = 5f;
 
@@ -14,13 +15,16 @@ public class Player : MonoBehaviour
     {
         playerRigidBody = GetComponent<Rigidbody>();
         focalPoint = GameObject.Find("FocalPoint");
+        gameController = GameObject.Find("GameController").GetComponent<GameController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float forwardInput = Input.GetAxis("Vertical");
-
-        playerRigidBody.AddForce(forwardInput * speed * focalPoint.transform.forward);
+        if (gameController.gameRunning)
+        {
+            float forwardInput = Input.GetAxis("Vertical");
+            playerRigidBody.AddForce(forwardInput * speed * focalPoint.transform.forward);
+        }
     }
 }

@@ -32,7 +32,7 @@ public class Floor : MonoBehaviour
         else if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(collision.gameObject);
-            gameController.gameRunning = false;
+            gameController.endGame();
         }
     }
 }
