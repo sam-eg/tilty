@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private GameObject focalPoint;
     private GameController gameController;
 
-    public float speed = 5f;
+    public float speed = 1000f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
         if (gameController.gameRunning)
         {
             float forwardInput = Input.GetAxis("Vertical");
-            playerRigidBody.AddForce(forwardInput * speed * focalPoint.transform.forward);
+            playerRigidBody.AddForce(forwardInput * speed * focalPoint.transform.forward * Time.deltaTime);
         }
     }
 }
